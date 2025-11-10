@@ -5,8 +5,6 @@ import { MoreVertical } from "lucide-react";
 export type DropdownMenuProps = {
 	onEdit?: () => void;
 	onDelete?: () => void;
-	className?: string;
-	triggerClassName?: string;
 };
 
 export default function DropdownMenu({
