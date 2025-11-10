@@ -1,7 +1,7 @@
 "use client"
 import * as React from "react";
 import { cn } from "@/lib/cn";
-import { MoreVertical, Pencil, Trash2 } from "lucide-react";
+import { MoreVertical } from "lucide-react";
 
 export type DropdownMenuProps = {
 	onEdit?: () => void;
