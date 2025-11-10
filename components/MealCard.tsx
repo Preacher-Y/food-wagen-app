@@ -8,7 +8,6 @@ export type Meal = {
   id: string;
   name: string;
   avatar: string;
-  price?: string | number;
   Price?: string | number;
   logo?: string;
   rating?: string | number;
@@ -28,7 +27,7 @@ export default function MealCard({
   onEdit,
   onDelete,
 }: MealCardProps) {
-  const priceText = meal.Price ? `$${Number(meal.Price).toFixed(2)}` : '0.00';
+  const priceText = meal.Price ? `$${Number(meal.Price).toFixed(2)}` : null;
   const isOpen = meal.open ?? false;
 
   return (
@@ -44,7 +43,7 @@ export default function MealCard({
           priority={false}
         />
 
-        {priceText ? (
+        {priceText !== null ? (
           <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-lg bg-tag px-3.5 py-1.5 text-[20px] font-semibold text-white shadow-button-shadow">
             <Tag
               fill="white"
@@ -86,14 +85,13 @@ export default function MealCard({
         <DropdownMenu
           onEdit={() => onEdit?.(meal)}
           onDelete={() => onDelete?.(meal)}
-          triggerClassName="bg-white"
         />
       </div>
 
       <div>
         <span
           className={cn(
-            "inline-block rounded-2xl px-5 py-2 text-sm tracking-wideR font-semibold",
+            "inline-block rounded-2xl px-5 py-2 text-sm tracking-wide font-semibold",
             isOpen
               ? "bg-green-100 text-green-700"
               : "bg-tag/20 text-tag"
