@@ -56,7 +56,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 					baseStyles,
 					variantStyles[variant],
 					sizeStyles[size],
-					"min-w-24",
+					"min-w-24 cursor-pointer",
 					className
 				)}
 				disabled={isDisabled}
