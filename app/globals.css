@@ -23,6 +23,7 @@
 
 @layer utilities{
   .shadow-button-shadow{
-    box-shadow: drop-shadow(0 5px 10px rgba(255, 174, 0, 0.26)) drop-shadow(0 20px 40px rgba(255, 174, 0, 0.29));
+    box-shadow: 0 5px 10px rgba(255, 174, 0, 0.26), 0 20px 40px rgba(255, 174, 0, 0.29);
   }
+}
 }
