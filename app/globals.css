@@ -18,6 +18,9 @@
   --color-tag: #F17228;
   --color-rate: #FFB30E;
 
+  --color-footer: #212121;
+  --color-footer-light: #F5F5F5;
+
   --shadow-button-shadow: 0 5px 10px rgba(255, 174, 0, 0.26), 0 20px 40px rgba(255, 174, 0, 0.29);
 
 }
