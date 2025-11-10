@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import * as React from "react";
 import DropdownMenu from "@/components/ui/DropdownMenu";
 import { cn } from "@/lib/cn";
 import { Tag, Star } from "lucide-react";
