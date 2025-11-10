@@ -19,14 +19,12 @@ export type Meal = {
 
 export type MealCardProps = {
   meal: Meal;
-  className?: string;
   onEdit?: (meal: Meal) => void;
   onDelete?: (meal: Meal) => void;
 };
 
 export default function MealCard({
   meal,
-  className,
   onEdit,
   onDelete,
 }: MealCardProps) {
@@ -34,13 +32,7 @@ export default function MealCard({
   const isOpen = meal.open ?? false;
 
   return (
-    <div
-      className={cn(
-        "group relative overflow-hidden rounded-2xl bg-white",
-        className
-      )}
-    >
-
+    <div className="group relative overflow-hidden rounded-2xl bg-white">
       <div className="relative aspect-4/3 w-full">
 
         <Image

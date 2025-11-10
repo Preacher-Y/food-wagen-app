@@ -1,6 +1,5 @@
 "use client"
 import * as React from "react";
-import { cn } from "@/lib/cn";
 import { MoreVertical } from "lucide-react";
 
 export type DropdownMenuProps = {
@@ -13,8 +12,6 @@ export type DropdownMenuProps = {
 export default function DropdownMenu({
 	onEdit,
 	onDelete,
-	className,
-	triggerClassName,
 }: DropdownMenuProps) {
 	const [open, setOpen] = React.useState(false);
 	const menuRef = React.useRef<HTMLDivElement | null>(null);
@@ -32,14 +29,11 @@ export default function DropdownMenu({
 	}, [open]);
 
 	return (
-		<div ref={menuRef} className={cn("relative inline-block text-left self-start", className)}>
+		<div ref={menuRef} className="relative inline-block text-left self-start">
 			<button
 				aria-haspopup="menu"
 				aria-expanded={open}
-				className={cn(
-					"flex items-end text-zinc-700",
-					triggerClassName
-				)}
+				className="flex items-end text-zinc-700"
 				onClick={() => setOpen((prev) => !prev)}
 			>
 				<span className="sr-only">Open menu</span>
