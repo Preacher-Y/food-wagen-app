@@ -27,7 +27,7 @@ export default function Search() {
 				</div>
 
 
-				<div className="p-6 flex items-center gap-3 border-t border-t-gray-100">
+				<div className="p-6 grid md:flex items-center gap-3 border-t border-t-gray-100">
 					<div className="flex min-h-12 flex-1 items-center gap-2 rounded-xl bg-zinc-100 px-3">
 						<SearchIcon className="h-5 w-5 text-hero-light" />
 						<input
