@@ -10,25 +10,23 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 	size?: ButtonSize;
     loadingText?:string;
 	isLoading?: boolean;
-	leftIcon?: React.ReactNode;
-	rightIcon?: React.ReactNode;
 };
 
 const baseStyles =
-	"inline-flex w-full items-center justify-center gap-2 rounded-xl font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-85 disabled:cursor-not-allowed";
+	"inline-flex w-full items-center justify-center gap-2 font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-85 disabled:cursor-not-allowed";
 
  const variantStyles: Record<ButtonVariant, string> = {
  	primary:
- 		"bg-gradient-to-br from-button-light to-button-dark text-white shadow-button-shadow",
+ 		"bg-gradient-to-br from-button-light to-button-dark text-white shadow-button-shadow rounded-xl",
  	secondary:
- 		"bg-white text-black border border-button-light hover:bg-zinc-50",
+ 		"bg-white text-black border border-button-light hover:bg-zinc-50 rounded-xl",
     hero:
-        "bg-gradient-to-br from-hero-light to-hero-dark text-white"
+        "bg-gradient-to-br from-hero-light to-hero-dark text-white rounded-lg"
   };
 
 const sizeStyles: Record<ButtonSize, string> = {
 	sm: "py-2 px-4 text-sm",
-	md: "py-3 px-5 text-sm",
+	md: "py-4 px-10 text-sm",
 	lg: "py-4 px-6 text-base",
 };
 
@@ -39,8 +37,6 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 			variant = "primary",
 			size = "md",
 			isLoading = false,
-			leftIcon,
-			rightIcon,
             loadingText,
 			children,
 			disabled,
@@ -69,9 +65,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 					</span>
 				) : (
 					<>
-						{leftIcon ? <span className="-ml-1">{leftIcon}</span> : null}
 						{children}
-						{rightIcon ? <span className="-mr-1">{rightIcon}</span> : null}
 					</>
 				)}
 			</button>

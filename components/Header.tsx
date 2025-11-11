@@ -22,7 +22,7 @@ export default function Header() {
             </h1>
           </div>
 
-          <div className="flex items-center 2xl:translate-x-[104px] md:w-32 2xl:w-38">
+          <div className="flex items-center 2xl:translate-x-[102px] md:w-32 2xl:w-38">
             <Button
                 variant="primary"
                 size="sm"
