@@ -11,7 +11,7 @@ export default function Search() {
 		<div className="w-full">
 			<div className="w-full max-w-[760px] rounded-2xl bg-white shadow-[0_30px_60px_-20px_rgba(0,0,0,0.15)]">
 
-				<div className="flex items-center gap-3 p-6">
+				<div className="flex items-center gap-3 p-4 xl:p-6">
 					<TabButton
 						active={active}
 						icon={<MotorbikeIcon className="h-4 w-4" />}
@@ -27,7 +27,7 @@ export default function Search() {
 				</div>
 
 
-				<div className="p-6 grid md:flex items-center gap-3 border-t border-t-gray-100">
+				<div className="p-4 xl:p-6 grid md:flex items-center gap-3 border-t border-t-gray-100">
 					<div className="flex min-h-12 flex-1 items-center gap-2 rounded-xl bg-zinc-100 px-3">
 						<SearchIcon className="h-5 w-5 text-hero-light" />
 						<input
