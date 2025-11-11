@@ -9,7 +9,7 @@ export default function Search() {
 
 	return (
 		<div className="w-full">
-			<div className="mx-auto w-full max-w-[720px] rounded-2xl bg-white shadow-[0_30px_60px_-20px_rgba(0,0,0,0.15)]">
+			<div className="w-full max-w-[760px] rounded-2xl bg-white shadow-[0_30px_60px_-20px_rgba(0,0,0,0.15)]">
 
 				<div className="flex items-center gap-3 p-6">
 					<TabButton

@@ -5,7 +5,7 @@ import { Button } from "./ui/Button";
 export default function Header() {
   return (
     <header className="relative w-full bg-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-sm md:max-w-md lg:max-w-6xl 2xl:max-w-[1440px] mx-auto">
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-[74px]">
           <div className="flex items-center gap-2 sm:gap-3">
             <Image
