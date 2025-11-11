@@ -1,11 +1,16 @@
 "use client";
 import Image from "next/image";
 import { Button } from "./ui/Button";
+import { useState } from "react";
+import AddMealModal from "./modals/AddMealModal";
 
 export default function Header() {
+
+   const [open , setOpen] = useState<boolean>(false)
+
   return (
     <header className="relative w-full bg-white">
-      <div className="max-w-sm md:max-w-md lg:max-w-6xl 2xl:max-w-[1440px] mx-auto">
+      <div className="max-w-sm md:max-w-md lg:max-w-5xl 2xl:max-w-[1440px] mx-auto">
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-[74px]">
           <div className="flex items-center gap-2 sm:gap-3">
             <Image
@@ -24,6 +29,7 @@ export default function Header() {
 
           <div className="flex items-center 2xl:translate-x-[102px] md:w-32 2xl:w-38">
             <Button
+                onClick={()=>setOpen(true)}
                 variant="primary"
                 size="sm"
                 className="text-[14px] md:text-[16.5px] 2xl:text-[18px]"
@@ -32,7 +38,8 @@ export default function Header() {
             </Button>
           </div>
         </div>
-      </div>  
+      </div>
+      <AddMealModal open={open} onClose={()=>setOpen(false)} />   
     </header>
   );
 }

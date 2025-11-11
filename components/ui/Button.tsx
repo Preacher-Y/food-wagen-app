@@ -26,7 +26,7 @@ const baseStyles =
 
 const sizeStyles: Record<ButtonSize, string> = {
 	sm: "py-2 px-4 text-sm",
-	md: "py-4 px-10 text-sm",
+	md: "py-3.5 px-10 text-sm",
 	lg: "py-4 px-6 text-base",
 };
 

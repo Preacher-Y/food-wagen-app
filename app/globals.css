@@ -21,6 +21,8 @@
   --color-footer: #212121;
   --color-footer-light: #F5F5F5;
 
+  --font-sourcesans: "Source Sans 3", sans-serif;
+
   --shadow-button-shadow: 0 5px 10px rgba(255, 174, 0, 0.26), 0 20px 40px rgba(255, 174, 0, 0.29);
 
 }

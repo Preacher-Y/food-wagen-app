@@ -4,7 +4,7 @@ import { Button } from "./ui/Button";
 export default function Footer() {
   return (
     <footer className="w-full bg-footer text-white">
-      <div className="max-w-sm md:max-w-md lg:max-w-6xl 2xl:max-w-[1440px] mx-auto">
+      <div className="max-w-sm md:max-w-md lg:max-w-5xl 2xl:max-w-[1440px] mx-auto">
         <div className="py-12 sm:py-16 lg:py-20 grid grid-cols-1 sm:grid-cols-[auto_1fr_minmax(360px,420px)] sm:items-start sm:gap-x-12 lg:gap-x-16">
           <div className="grid grid-cols-3 gap-x-8 lg:gap-x-12">
             <div>
