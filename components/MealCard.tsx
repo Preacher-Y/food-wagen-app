@@ -29,11 +29,11 @@ export default function MealCard({
 }: MealCardProps) {
   const priceText = meal.Price ? `$${Number(meal.Price).toFixed(2)}` : null;
   const isOpen = meal.open ?? false;
+  const hasValidLogo = meal.logo && typeof meal.logo === "string" && meal.logo.trim().length > 0;
 
   return (
     <div className="group relative overflow-hidden rounded-2xl bg-white">
       <div className="relative aspect-4/3 w-full">
-
         <Image
           src={meal.avatar}
           alt={meal.name}
@@ -44,7 +44,7 @@ export default function MealCard({
         />
 
         {priceText !== null ? (
-          <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-lg bg-tag px-3.5 py-1.5 text-[20px] font-semibold text-white shadow-button-shadow">
+          <div className="absolute left-4 top-4 inline-flex items-center gap-1 xl:gap-2 rounded-lg bg-tag px-3 xl:px-3.5 py-1 xl:py-1.5 xl:text-[20px] font-semibold text-white shadow-button-shadow">
             <Tag
               fill="white"
               stroke="#F17228"
@@ -60,10 +60,10 @@ export default function MealCard({
 
         <div className="flex items-center gap-6">
 
-          {meal.logo ? (
+          {hasValidLogo ? (
             <div className="relative h-16 w-16 overflow-hidden rounded-md border border-zinc-200">
               <Image
-                src={meal.logo}
+                src={meal.logo!}
                 alt={`${meal.name} logo`}
                 fill
                 className="object-cover w-full h-full"
