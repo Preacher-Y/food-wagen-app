@@ -6,6 +6,7 @@ import AddMealModal from "./modals/AddMealModal";
 import EditMealModal from "./modals/EditMealModal";
 import DeleteMealModal from "./modals/DeleteMealModal";
 import { useMealContext } from "@/contexts/MealContext";
+import { ChevronRight } from "lucide-react";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 const MEALS_PER_PAGE = 8;
@@ -102,7 +103,7 @@ export default function FeaturedMeals({ searchQuery = "" }: Props) {
 
   return (
     <>
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <section className="container mx-auto flex flex-col items-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12">
           Featured Meals
         </h2>
@@ -125,15 +126,16 @@ export default function FeaturedMeals({ searchQuery = "" }: Props) {
             </div>
 
             {remainingMeals > 0 && (
-              <div className="flex justify-center">
+              <div className="flex max-w-md items-center gap-1 justify-center">
                 <Button
                   variant="primary"
                   size="md"
                   onClick={handleLoadMore}
                   disabled={remainingMeals < MEALS_PER_PAGE}
-                  className="w-auto px-8 sm:px-10"
+                  className="w-auto px-8 sm:px-10 text-3xl"
                 >
-                 {' Load more >'}
+                 <span>Load more</span>
+                 <ChevronRight className="w-4 h-4"/>
                 </Button>
               </div>
             )}
