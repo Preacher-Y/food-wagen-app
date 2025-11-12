@@ -1,48 +1,62 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import MealCard, { type Meal } from "./MealCard";
 import { Button } from "./ui/Button";
 import AddMealModal from "./modals/AddMealModal";
 import EditMealModal from "./modals/EditMealModal";
 import DeleteMealModal from "./modals/DeleteMealModal";
+import { useMealContext } from "@/contexts/MealContext";
 
-const API_URL = "https://6852821e0594059b23cdd834.mockapi.io/Food";
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 const MEALS_PER_PAGE = 8;
 
-export default function FeaturedMeals() {
+type Props = {
+  searchQuery?: string;
+};
+
+export default function FeaturedMeals({ searchQuery = "" }: Props) {
+  const { refreshTrigger } = useMealContext();
   const [meals, setMeals] = useState<Meal[]>([]);
   const [displayedMeals, setDisplayedMeals] = useState<Meal[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   
-  // Modal states
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
+
+  const fetchMeals = useCallback(async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(API_URL);
+      if (!response.ok) throw new Error("Failed to fetch meals");
+      const data: Meal[] = await response.json();
+      let sanitizedData = data.map((meal) => ({
+        ...meal,
+        logo: meal.logo && meal.logo.trim() !== "" ? meal.logo : undefined,
+      }));
+
+      if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase();
+        sanitizedData = sanitizedData.filter((meal) =>
+          meal.name.toLowerCase().includes(query)
+        );
+      }
+
+      setMeals(sanitizedData);
+      setDisplayedMeals(sanitizedData.slice(0, MEALS_PER_PAGE));
+      setCurrentPage(1);
+    } catch (error) {
+      console.error("Error fetching meals:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [searchQuery]);
 
   useEffect(() => {
-    async function fetchMeals() {
-      try {
-        setLoading(true);
-        const response = await fetch(API_URL);
-        if (!response.ok) throw new Error("Failed to fetch meals");
-        const data: Meal[] = await response.json();
-        // Sanitize data: convert empty strings to undefined for optional fields
-        const sanitizedData = data.map((meal) => ({
-          ...meal,
-          logo: meal.logo && meal.logo.trim() !== "" ? meal.logo : undefined,
-        }));
-        setMeals(sanitizedData);
-        // Display first 8 meals
-        setDisplayedMeals(sanitizedData.slice(0, MEALS_PER_PAGE));
-      } catch (error) {
-        console.error("Error fetching meals:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
     fetchMeals();
-  }, []);
+  }, [fetchMeals, refreshTrigger]);
 
   const handleLoadMore = () => {
     const nextPage = currentPage + 1;
@@ -58,14 +72,18 @@ export default function FeaturedMeals() {
 
   const remainingMeals = meals.length - displayedMeals.length;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleEdit = (meal: Meal) => {
+    setSelectedMeal(meal);
     setEditModalOpen(true);
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleDelete = (meal: Meal) => {
+    setSelectedMeal(meal);
     setDeleteModalOpen(true);
+  };
+
+  const handleModalSuccess = () => {
+    fetchMeals();
   };
 
   if (loading) {
@@ -75,6 +93,7 @@ export default function FeaturedMeals() {
           Featured Meals
         </h2>
         <div className="flex justify-center items-center py-12">
+          <div className="w-8 h-8 border-4 border-zinc-500 border-t-white rounded-full animate-spin mr-3"></div>
           <p className="text-zinc-500">Loading meals...</p>
         </div>
       </section>
@@ -94,7 +113,7 @@ export default function FeaturedMeals() {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
               {displayedMeals.map((meal) => (
                 <MealCard
                   key={meal.id}
@@ -114,7 +133,7 @@ export default function FeaturedMeals() {
                   disabled={remainingMeals < MEALS_PER_PAGE}
                   className="w-auto px-8 sm:px-10"
                 >
-                  Load more &gt;
+                 {' Load more >'}
                 </Button>
               </div>
             )}
@@ -122,9 +141,29 @@ export default function FeaturedMeals() {
         )}
       </section>
 
-      <AddMealModal open={addModalOpen} onClose={() => setAddModalOpen(false)} />
-      <EditMealModal open={editModalOpen} onClose={() => setEditModalOpen(false)} />
-      <DeleteMealModal open={deleteModalOpen} onClose={() => setDeleteModalOpen(false)} />
+      <AddMealModal 
+        open={addModalOpen} 
+        onClose={() => setAddModalOpen(false)}
+        onSuccess={handleModalSuccess}
+      />
+      <EditMealModal 
+        open={editModalOpen} 
+        onClose={() => {
+          setEditModalOpen(false);
+          setSelectedMeal(null);
+        }}
+        meal={selectedMeal}
+        onSuccess={handleModalSuccess}
+      />
+      <DeleteMealModal 
+        open={deleteModalOpen} 
+        onClose={() => {
+          setDeleteModalOpen(false);
+          setSelectedMeal(null);
+        }}
+        meal={selectedMeal}
+        onSuccess={handleModalSuccess}
+      />
     </>
   );
 }

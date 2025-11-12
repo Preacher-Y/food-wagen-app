@@ -1,7 +1,12 @@
+"use client";
 import Image from "next/image";
 import Search from "@/components/Search";
 
-export default function Hero() {
+type Props = {
+  onSearch?: (query: string) => void;
+};
+
+export default function Hero({ onSearch }: Props) {
   return (
     <section className="relative w-full overflow-hidden bg-rate">
       <div className="max-w-sm md:max-w-md lg:max-w-5xl 2xl:max-w-[1440px] mx-auto">
@@ -14,7 +19,7 @@ export default function Hero() {
               Within a few clicks, find meals that are accessible near you
             </p>
             <div className="mt-6 md:mt-7 xl:mt-8">
-              <Search />
+              <Search onSearch={onSearch} />
             </div>
           </div>
 

@@ -3,10 +3,11 @@ import Image from "next/image";
 import { Button } from "./ui/Button";
 import { useState } from "react";
 import AddMealModal from "./modals/AddMealModal";
+import { useMealContext } from "@/contexts/MealContext";
 
 export default function Header() {
-
    const [open , setOpen] = useState<boolean>(false)
+   const { refreshMeals } = useMealContext();
 
   return (
     <header className="relative w-full bg-white">
@@ -39,7 +40,11 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <AddMealModal open={open} onClose={()=>setOpen(false)} />   
+      <AddMealModal 
+        open={open} 
+        onClose={()=>setOpen(false)}
+        onSuccess={refreshMeals}
+      />   
     </header>
   );
 }

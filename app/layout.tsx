@@ -3,6 +3,7 @@ import { Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { MealProvider } from "@/contexts/MealContext";
 
 export const metadata: Metadata = {
   title: "FoodWagen",
@@ -28,9 +29,11 @@ export default function RootLayout({
       <body
         className={`${sourceSans.variable} font-sourcesans antialiased`}
       >
-        <Header />
-        {children}
-        <Footer />
+        <MealProvider>
+          <Header />
+          {children}
+          <Footer />
+        </MealProvider>
       </body>
     </html>
   );

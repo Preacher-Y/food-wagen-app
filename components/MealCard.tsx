@@ -44,7 +44,7 @@ export default function MealCard({
         />
 
         {priceText !== null ? (
-          <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-lg bg-tag px-3.5 py-1.5 text-[20px] font-semibold text-white shadow-button-shadow">
+          <div className="absolute left-4 top-4 inline-flex items-center gap-1 xl:gap-2 rounded-lg bg-tag px-3 xl:px-3.5 py-1 xl:py-1.5 xl:text-[20px] font-semibold text-white shadow-button-shadow">
             <Tag
               fill="white"
               stroke="#F17228"
